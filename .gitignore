@@ -1,0 +1,11 @@
+.env
+.venv-paddle/
+.browser-profile/
+runtime/
+config.json
+config_paddle.json
+results.jsonl
+snapshots/
+__pycache__/
+*.pyc
+paddle_test_choice.png

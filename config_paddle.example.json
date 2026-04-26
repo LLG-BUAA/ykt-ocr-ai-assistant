@@ -1,0 +1,178 @@
+{
+    "interval_seconds":  3,
+    "region":  {
+                   "name":  "target",
+                   "x":  100,
+                   "y":  100,
+                   "w":  900,
+                   "h":  760
+               },
+    "prompt_u":  "这个题选什么，仔细思考，确保答案正确。直接告诉我答案。格式：正确答案：x,x,x,x 回答（ABCD，和正确答案的文本，遇到多选就用,隔开。如果是判断题就回答对错）",
+    "api_provider":  "openai",
+    "api_base_url":  "http://127.0.0.1:7999/v1",
+    "gemini_model":  "gpt-5.4",
+    "api_key_env":  "OPENAI_API_KEY",
+    "api_key":  "",
+    "paddle_lang":  "ch",
+    "use_choice_formatter":  true,
+    "save_snapshots":  true,
+    "answer_validation_pause_on_mismatch":  false,
+    "workflow_actions":  [
+                             {
+                                 "enabled":  true,
+                                 "type":  "if_text",
+                                 "params":  {
+                                                "condition":  "screenshot_similarity",
+                                                "text":  "",
+                                                "source":  "ocr",
+                                                "mode":  "all",
+                                                "similarity_threshold":  "90",
+                                                "similarity_lag":  "3",
+                                                "true_action":  "stop",
+                                                "true_value":  "1",
+                                                "false_action":  "continue",
+                                                "false_value":  "1"
+                                            }
+                             },
+                             {
+                                 "enabled":  true,
+                                 "type":  "ocr",
+                                 "params":  {
+                                                "force":  true
+                                            }
+                             },
+                             {
+                                 "enabled":  true,
+                                 "type":  "if_text",
+                                 "params":  {
+                                                "condition":  "text",
+                                                "text":  "已提交",
+                                                "source":  "ocr",
+                                                "mode":  "any",
+                                                "similarity_threshold":  "90",
+                                                "similarity_lag":  "1",
+                                                "true_action":  "continue",
+                                                "true_value":  "1",
+                                                "false_action":  "jump",
+                                                "false_value":  "7"
+                                            }
+                             },
+                             {
+                                 "enabled":  true,
+                                 "type":  "click_text",
+                                 "params":  {
+                                                "text":  "下一题",
+                                                "click_area":  "text"
+                                            }
+                             },
+                             {
+                                 "enabled":  true,
+                                 "type":  "wait",
+                                 "params":  {
+                                                "seconds":  "0.5"
+                                            }
+                             },
+                             {
+                                 "enabled":  true,
+                                 "type":  "ocr",
+                                 "params":  {
+                                                "force":  true
+                                            }
+                             },
+                             {
+                                 "enabled":  true,
+                                 "type":  "if_text",
+                                 "params":  {
+                                                "condition":  "text",
+                                                "text":  "已提交",
+                                                "source":  "ocr",
+                                                "mode":  "any",
+                                                "similarity_threshold":  "90",
+                                                "similarity_lag":  "1",
+                                                "true_action":  "stop",
+                                                "true_value":  "1",
+                                                "false_action":  "continue",
+                                                "false_value":  "1"
+                                            }
+                             },
+                             {
+                                 "enabled":  true,
+                                 "type":  "ask_ai",
+                                 "params":  {
+                                                "prompt":  "{U}\nQ:\n{Q}",
+                                                "include_image":  false
+                                            }
+                             },
+                             {
+                                 "enabled":  true,
+                                 "type":  "parse_ai",
+                                 "params":  {
+                                                "regex":  "正确答案[:：]\\s*([^\\n\\r]+)",
+                                                "source":  "ai"
+                                            }
+                             },
+                             {
+                                 "enabled":  true,
+                                 "type":  "click_matches",
+                                 "params":  {
+                                                "click_area":  "text",
+                                                "delay":  "1"
+                                            }
+                             },
+                             {
+                                 "enabled":  true,
+                                 "type":  "wait",
+                                 "params":  {
+                                                "seconds":  "1"
+                                            }
+                             },
+                             {
+                                 "enabled":  true,
+                                 "type":  "click_text",
+                                 "params":  {
+                                                "text":  "提交",
+                                                "click_area":  "letter"
+                                            }
+                             },
+                             {
+                                 "enabled":  true,
+                                 "type":  "wait",
+                                 "params":  {
+                                                "seconds":  "1"
+                                            }
+                             }
+                         ],
+    "browser_enabled":  true,
+    "browser_path":  "",
+    "browser_debug_port":  9223,
+    "browser_window_x":  0,
+    "browser_window_y":  0,
+    "browser_window_w":  1100,
+    "browser_window_h":  900,
+    "browser_wait_seconds":  10.0,
+    "browser_next_wait_seconds":  2.0,
+    "browser_urls":  [
+                         "https://buaa.yuketang.cn/pro/lms/CUJttg2ZDc3/31025069/homework/79236591",
+                         "https://buaa.yuketang.cn/pro/lms/CUJttg2ZDc3/31025069/homework/79236610",
+                         "https://buaa.yuketang.cn/pro/lms/CUJttg2ZDc3/31025069/homework/79236626",
+                         "https://buaa.yuketang.cn/pro/lms/CUJttg2ZDc3/31025069/homework/79236631",
+                         "https://buaa.yuketang.cn/pro/lms/CUJttg2ZDc3/31025069/homework/79236636",
+                         "https://buaa.yuketang.cn/pro/lms/CUJttg2ZDc3/31025069/homework/79236658",
+                         "https://buaa.yuketang.cn/pro/lms/CUJttg2ZDc3/31025069/homework/79236606",
+                         "https://buaa.yuketang.cn/pro/lms/CUJttg2ZDc3/31025069/homework/79236673",
+                         "https://buaa.yuketang.cn/pro/lms/CUJttg2ZDc3/31025069/homework/79236677",
+                         "https://buaa.yuketang.cn/pro/lms/CUJttg2ZDc3/31025069/homework/79236700",
+                         "https://buaa.yuketang.cn/pro/lms/CUJttg2ZDc3/31025069/homework/79236703",
+                         "https://buaa.yuketang.cn/pro/lms/CUJttg2ZDc3/31025069/homework/79236708",
+                         "https://buaa.yuketang.cn/pro/lms/CUJttg2ZDc3/31025069/homework/79236722",
+                         "https://buaa.yuketang.cn/pro/lms/CUJttg2ZDc3/31025069/homework/79236729",
+                         "https://buaa.yuketang.cn/pro/lms/CVBA49KU4F3/30992005/homework/78624457",
+                         "https://buaa.yuketang.cn/pro/lms/CVBA49KU4F3/30992005/homework/78624463",
+                         "https://buaa.yuketang.cn/pro/lms/CVBA49KU4F3/30992005/homework/78624471",
+                         "https://buaa.yuketang.cn/pro/lms/CVBA49KU4F3/30992005/homework/78624476",
+                         "https://buaa.yuketang.cn/pro/lms/CVBA49KU4F3/30992005/homework/78624481",
+                         "https://buaa.yuketang.cn/pro/lms/CVBA49KU4F3/30992005/homework/78624489",
+                         "https://buaa.yuketang.cn/pro/lms/CVBA49KU4F3/30992005/homework/78624495",
+                         "https://buaa.yuketang.cn/pro/lms/CVBA49KU4F3/30992005/homework/78624501"
+                     ]
+}
